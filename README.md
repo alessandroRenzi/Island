@@ -1,2 +1,2 @@
 # Island
-ava vs. Kotlin: Automation of  Web App deployment to Cloud via Docker containers.
+Java vs. Kotlin: Automation of  Web App deployment to Cloud via Docker containers.
