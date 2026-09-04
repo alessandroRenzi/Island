@@ -1,0 +1,2 @@
+public class ZucchettiPackageValidatorTest {
+}
