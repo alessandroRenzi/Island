@@ -1,19 +1,20 @@
 ### Gradle ###
 .gradle
-build/
+**/build/
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
 .kotlin
+
+## JaCoCo ##
+*.exec
+*.ec
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+**/out/
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
 
 ### Logs ###
 *.logs

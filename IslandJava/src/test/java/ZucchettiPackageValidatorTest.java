@@ -12,6 +12,7 @@ public class ZucchettiPackageValidatorTest {
         assertTrue(validator.isValid("zucchetti.zip"), ".zip file should be accepted");
     }
 
+    //test that is not a Zip package
     @Test
     public void isNotAZipPackage(){
         ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
