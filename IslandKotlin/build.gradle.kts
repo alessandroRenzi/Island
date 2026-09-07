@@ -1,22 +1,29 @@
 plugins {
-    kotlin("jvm") version "2.3.0"
+    kotlin("jvm")
+    id("jacoco")
 }
 
-group = "io.github.alessandrorenzi"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
+kotlin{
+    jvmToolchain(21)
+}
 dependencies {
     testImplementation(kotlin("test"))
 }
 
-kotlin {
-    jvmToolchain(23)
-}
-
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
 }
