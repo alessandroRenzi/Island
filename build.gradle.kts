@@ -1,11 +1,10 @@
 plugins {
     //Gradle plugin that aggregate coverage from submodules
     id("jacoco-report-aggregation")
-    //Coveralss plugin
-    id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
     //kotlin
     kotlin("jvm") version "2.3.0" apply false
 }
+
 //repository for root
 repositories {
     mavenCentral()
@@ -27,7 +26,10 @@ dependencies{
     jacocoAggregation(project(":IslandKotlin"))
 }
 
-coverallsJacoco{
-    //Pointing to Jacoco xml report for coveralls
-    reportPath ="${layout.buildDirectory.get()}/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml"
+reporting {
+    reports {
+        create<JacocoCoverageReport>("testCodeCoverageReport") {
+            testSuiteName = "test"
+        }
+    }
 }
