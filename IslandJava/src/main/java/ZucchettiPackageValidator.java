@@ -3,8 +3,6 @@ import org.apache.commons.io.FilenameUtils;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Locale;
-import java.util.Objects;
 import java.util.Set;
 
 public class ZucchettiPackageValidator {
