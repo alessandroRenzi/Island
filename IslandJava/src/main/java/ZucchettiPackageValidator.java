@@ -11,7 +11,7 @@ public class ZucchettiPackageValidator {
     //method that check if file passed is an allowed kind of file
     public boolean isValid(String fileNameWithPath) {
         String extension = FilenameUtils.getExtension(fileNameWithPath);
-        return Objects.equals(extension, "zip");
+        return Objects.equals(extension, "zip") | Objects.equals(extension,"7Zip") | Objects.equals(extension,"gz");
     }
 
     //method that check if file passed is located in file system

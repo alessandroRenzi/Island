@@ -10,18 +10,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ZucchettiPackageValidatorTest {
 
-    //test that is a zip package
     @Test
     public void isAZipPackage() {
         ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
-        assertTrue(validator.isValid("zucchetti.zip"), ".zip file should be accepted");
+        assertTrue(validator.isValid("zucchetti.zip"), "zip file should be accepted");
     }
 
-    //test that is not a Zip package
+    @Test
+    public void isA7ZipPackage(){
+        ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
+        assertTrue(validator.isValid("zucchetti.7Zip"),"7Zip file should be accepted");
+    }
+
+    @Test
+    public void isATarGzPackage(){
+        ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
+        assertTrue(validator.isValid("zucchetti.tar.gz"),"gz file should be accepted");
+    }
+
     @Test
     public void isNotAZipPackage(){
         ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
-        assertFalse(validator.isValid("zucchetti.iso"),".iso file shouldn't be accepted");
+        assertFalse(validator.isValid("zucchetti.iso"),"iso file shouldn't be accepted");
     }
 
     //test that path not contain the file
@@ -32,7 +42,6 @@ public class ZucchettiPackageValidatorTest {
         assertFalse(validator.exists(fileFromTmpDir.toAbsolutePath().toString()),"File not should being in that path");
     }
 
-    //test that path contain the file
     @Test
     public void fileFromAbsolutePathExists(@TempDir Path tempDir) throws IOException {
         Path fileFromTmpDir = Files.createFile(tempDir.resolve("Zucchetti.zip"));
