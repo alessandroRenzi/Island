@@ -36,7 +36,7 @@ public class ZucchettiPackageValidatorTest {
 
     //test that path not contain the file
     @Test
-    public void fileFromAbsolutePathNotExists(@TempDir Path tempDir) throws IOException {
+    public void fileFromAbsolutePathNotExists(@TempDir Path tempDir) {
         Path fileFromTmpDir =tempDir.resolve("notZucchetti.zip");
         ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
         assertFalse(validator.exists(fileFromTmpDir.toAbsolutePath().toString()),"File not should being in that path");
