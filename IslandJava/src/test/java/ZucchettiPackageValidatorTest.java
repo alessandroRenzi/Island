@@ -19,7 +19,7 @@ public class ZucchettiPackageValidatorTest {
     @Test
     public void isA7ZipPackage(){
         ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
-        assertTrue(validator.isValid("zucchetti.7Zip"),"7Zip file should be accepted");
+        assertTrue(validator.isValid("zucchetti.7z"),"7Zip file should be accepted");
     }
 
     @Test
