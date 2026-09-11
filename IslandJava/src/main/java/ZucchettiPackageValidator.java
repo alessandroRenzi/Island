@@ -17,7 +17,7 @@ public class ZucchettiPackageValidator {
     //method that check if file passed is located in file system
     public boolean exists(String fileNameWithPath) {
         Path completePathWithFile = Paths.get(fileNameWithPath);
-        return Files.exists(completePathWithFile) && Files.isRegularFile(completePathWithFile);
+        return Files.exists(completePathWithFile) & Files.isRegularFile(completePathWithFile);
     }
 
 }
