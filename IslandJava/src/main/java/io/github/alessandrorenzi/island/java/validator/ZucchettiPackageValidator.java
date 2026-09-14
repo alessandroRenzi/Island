@@ -1,3 +1,5 @@
+package io.github.alessandrorenzi.island.java.validator;
+
 import org.apache.commons.io.FilenameUtils;
 
 import java.nio.file.Files;

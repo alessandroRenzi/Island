@@ -1,3 +1,5 @@
+package io.github.alessandrorenzi.island.java.validator;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
