@@ -13,37 +13,37 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ZucchettiPackageValidatorTest {
 
     @Test
-    public void isAZipPackage() {
+    public void assertTrueIsAZipPackage() {
         ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
         assertTrue(validator.isValid("zucchetti.zip"), "zip file should be accepted");
     }
 
     @Test
-    public void AssertTrueWithA7ZipPackage(){
+    public void assertTrueWithA7ZipPackage(){
         ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
         assertTrue(validator.isValid("zucchetti.7z"),"7Zip file should be accepted");
     }
 
     @Test
-    public void AssertTrueWithATarGzPackage(){
+    public void assertTrueWithATarGzPackage(){
         ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
         assertTrue(validator.isValid("zucchetti.tar.gz"),"gz file should be accepted");
     }
 
     @Test
-    public void AssertFalseWithNotAZipPackage(){
+    public void assertFalseWithNotAZipPackage(){
         ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
         assertFalse(validator.isValid("zucchetti.iso"),"iso file shouldn't be accepted");
     }
 
     @Test
-    public void AssertFalseWithNullFile(){
+    public void assertFalseWithNullFile(){
        ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
        assertFalse(validator.isValid(null),"null file shouldn't be accepted");
     }
 
     @Test
-    public void AssertFalseWithBlankStringOfFile(){
+    public void assertFalseWithBlankStringOfFile(){
         ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
         assertFalse(validator.isValid(""),"Blank string pointing to  file shouldn't be accepted");
     }
