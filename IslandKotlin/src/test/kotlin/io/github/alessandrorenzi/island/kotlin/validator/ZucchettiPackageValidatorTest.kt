@@ -33,4 +33,12 @@ class ZucchettiPackageValidatorTest {
         assertTrue(validator.isValid("zucchetti.tar.gz"))
     }
 
-}
+    /* NOT NEEDED -- fun isValid has String parameter that not accept null values
+    @Test
+    fun assertFalseWithNullPackage(){
+        val validator: ZucchettiPackageValidator = ZucchettiPackageValidator()
+            assertFalse(validator.isValid(null))
+        }
+    */
+    }
+

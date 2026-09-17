@@ -1,10 +1,11 @@
 package io.github.alessandrorenzi.island.kotlin.validator
 
+private val ALLOWED_FILE_EXTENSION = setOf("zip", "7z", "gz")
+
 class ZucchettiPackageValidator {
+
     fun isValid(fileNameWithPath: String): Boolean {
-        val result = fileNameWithPath.endsWith("zip", ignoreCase = true) ||
-                     fileNameWithPath.endsWith("7z", ignoreCase = true) ||
-                     fileNameWithPath.endsWith("gz", ignoreCase = true)
+        val result = ALLOWED_FILE_EXTENSION.any { extension -> fileNameWithPath.endsWith(extension, ignoreCase = true) }
         return result
     }
 }
