@@ -24,5 +24,4 @@ public class ZucchettiPackageValidator {
         Path completePathWithFile = Paths.get(fileNameWithPath);
         return Files.exists(completePathWithFile) & Files.isRegularFile(completePathWithFile);
     }
-
 }

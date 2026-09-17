@@ -26,5 +26,12 @@ class ZucchettiPackageValidatorTest {
         val validator: ZucchettiPackageValidator = ZucchettiPackageValidator()
         assertTrue(validator.isValid("zucchetti.7z"))
     }
+
+    @Test
+    fun assertTrueWithATarGzPackage(){
+        val validator: ZucchettiPackageValidator = ZucchettiPackageValidator()
+        assertTrue(validator.isValid("zucchetti.tar.gz"))
+    }
+
 }
 
