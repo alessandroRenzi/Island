@@ -8,4 +8,8 @@ class ZucchettiPackageValidator {
         val result = ALLOWED_FILE_EXTENSION.any { extension -> fileNameWithPath.endsWith(extension, ignoreCase = true) }
         return result
     }
+
+    fun exists(fileNameWithPath: String): Boolean {
+        return false
+    }
 }
