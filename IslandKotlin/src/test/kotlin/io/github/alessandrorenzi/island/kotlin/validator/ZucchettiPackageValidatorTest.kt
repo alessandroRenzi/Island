@@ -6,7 +6,12 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
-import java.nio.file.Path
+import kotlin.io.path.Path
+import kotlin.io.path.createFile
+import kotlin.io.path.createTempDirectory
+import kotlin.io.path.div
+import kotlin.io.path.pathString
+
 
 class ZucchettiPackageValidatorTest {
 
@@ -50,18 +55,20 @@ class ZucchettiPackageValidatorTest {
     }
 
     @Test
-    fun fileFromAbsolutePathNotExists(@TempDir tempDir: Path) {
-        val fileFromTmpDir = tempDir.resolve("notZucchetti.zip")
-        val validator: ZucchettiPackageValidator = ZucchettiPackageValidator()
-        assertFalse(validator.exists(fileFromTmpDir.toAbsolutePath().toString())
-        )
+    fun fileFromAbsolutePathNotExists() {
+        val validator = ZucchettiPackageValidator()
+        val tempDir = createTempDirectory()
+        //overloading operatore in classe Path (effettua la resolve)
+        val fileFromTempDir = tempDir / "notZucchetti.zip"
+        assertFalse(validator.exists(fileFromTempDir.pathString))
     }
 
     @Test
-    fun fileFromAbsolutePathExists(@TempDir tempDir: Path){
-        val fileFromTmpDir = tempDir.resolve("zucchetti.zip")
-        val validator: ZucchettiPackageValidator = ZucchettiPackageValidator();
-        assertTrue(validator.exists(fileFromTmpDir.toAbsolutePath().toString()))
+    fun fileFromAbsolutePathExists(){
+        val validator = ZucchettiPackageValidator()
+        val tempDir = createTempDirectory()
+        val fileFromTmpDir = (tempDir / "zucchetti.zip").createFile();
+        assertTrue(validator.exists(fileFromTmpDir.pathString))
     }
 }
 

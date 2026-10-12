@@ -1,5 +1,10 @@
 package io.github.alessandrorenzi.island.kotlin.validator
 
+
+import kotlin.io.path.Path
+import kotlin.io.path.exists
+import kotlin.io.path.isRegularFile
+
 private val ALLOWED_FILE_EXTENSION = setOf("zip", "7z", "gz")
 
 class ZucchettiPackageValidator {
@@ -10,6 +15,13 @@ class ZucchettiPackageValidator {
     }
 
     fun exists(fileNameWithPath: String): Boolean {
-        return false
+        val completePathWithFile = Path(fileNameWithPath)
+        return completePathWithFile.exists() && completePathWithFile.isRegularFile()
     }
+
+/*    fun exists(fileNameWithPath: String): Boolean =
+        Path(fileNameWithPath).let { path ->
+            path.exists() && path.isRegularFile()
+        }
+*/
 }
