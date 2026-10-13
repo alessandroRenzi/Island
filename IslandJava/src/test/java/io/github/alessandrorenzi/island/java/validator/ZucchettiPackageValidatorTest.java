@@ -62,4 +62,10 @@ public class ZucchettiPackageValidatorTest {
         ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
         assertTrue(validator.exists(fileFromTmpDir.toAbsolutePath().toString()),"File should being in that path ");
     }
+
+    @Test
+    public void AssertFalseWithAnExistingFileButNotRegularFileIsADirectory(@TempDir Path tempDir){
+        ZucchettiPackageValidator validator = new ZucchettiPackageValidator();
+        assertFalse(validator.exists(tempDir.toAbsolutePath().toString()));
+    }
 }

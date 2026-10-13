@@ -70,5 +70,12 @@ class ZucchettiPackageValidatorTest {
         val fileFromTmpDir = (tempDir / "zucchetti.zip").createFile();
         assertTrue(validator.exists(fileFromTmpDir.pathString))
     }
+
+    @Test
+    fun AssertFalseWithAnExistingFileButNotRegularFileIsADirectory(){
+        val validator = ZucchettiPackageValidator()
+        val tempDir = createTempDirectory()
+        assertFalse(validator.exists(tempDir.pathString))
+    }
 }
 
