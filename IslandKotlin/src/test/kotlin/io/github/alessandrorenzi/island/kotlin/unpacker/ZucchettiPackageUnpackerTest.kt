@@ -3,10 +3,10 @@ package io.github.alessandrorenzi.island.kotlin.unpacker
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
 import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.io.TempDir
-import java.nio.file.Files
-import java.nio.file.Path
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 import kotlin.io.path.*
 
 
@@ -25,7 +25,18 @@ class ZucchettiPackageUnpackerTest {
     }
 
     @Test
-    fun assertTrueWithAZipPackageThatIsAValidZipPackage(@TempDir tempDir: Path){
-        val dummyZipPath = tempDir / "/"
+    fun assertTrueWithAZipPackageThatIsAValidZipPackage(){
+        val fileSystem = Jimfs.newFileSystem(Configuration.unix())
+        val dummyZipPath = fileSystem.getPath("zucchetti.zip")
+        val dummyExtractingPath = dummyZipPath / "extracted"
+        //build a real .zip file
+        ZipOutputStream(dummyZipPath.outputStream()).use{ zip ->
+            zip.putNextEntry(ZipEntry("txtFile.txt"))
+            zip.write("I am a txt file than i am going to be compressed".toByteArray())
+            zip.closeEntry()
+        }
+        val zucchettiUnpacker = ZucchettiPackageUnpacker()
+        val result = zucchettiUnpacker.unpack(compressedFilePath = dummyZipPath, destinationDirectory = dummyExtractingPath)
+        assertTrue(result)
     }
 }
