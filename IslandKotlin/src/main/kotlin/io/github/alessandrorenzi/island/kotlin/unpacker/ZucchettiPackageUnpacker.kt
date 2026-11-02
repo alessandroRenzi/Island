@@ -12,7 +12,7 @@ class ZucchettiPackageUnpacker {
     fun unpack(compressedFilePath: Path, destinationDirectory: Path): Boolean {
         return try {
             //create directory if not exists
-            destinationDirectory.createDirectory();
+            destinationDirectory.createDirectory()
             //get inputStream from compressedFile that used with ZipInputStream
             ZipInputStream(compressedFilePath.inputStream()).use { zipInputStream ->
                 //use var because is mutable
@@ -23,7 +23,7 @@ class ZucchettiPackageUnpacker {
                         finalPath.createDirectories()
                     } else {
                         //? Safe call kotlin operator (avoid null values)
-                        finalPath.parent?.createDirectories();
+                        finalPath.parent?.createDirectories()
                         finalPath.outputStream().use { outputStream ->
                             zipInputStream.copyTo(outputStream)
                         }
