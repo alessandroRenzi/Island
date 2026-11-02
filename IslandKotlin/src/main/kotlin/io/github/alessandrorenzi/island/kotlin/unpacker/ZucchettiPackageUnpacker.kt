@@ -1,28 +1,40 @@
 package io.github.alessandrorenzi.island.kotlin.unpacker
 
-import java.nio.file.Files
 import java.nio.file.Path
 import java.util.zip.ZipInputStream
+import kotlin.io.path.createDirectories
+import kotlin.io.path.createDirectory
 import kotlin.io.path.inputStream
+import kotlin.io.path.outputStream
 
 class ZucchettiPackageUnpacker {
 
-    fun unpack(compressedFilePath: Path, destinationDirectory: Any): Boolean {
- // 1. `compressedFilePath.inputStream()` genera un oggetto `InputStream` (flusso di byte grezzi).
-// 2. `.use { fileInputStream ->` assegna quell'InputStream alla variabile `fileInputStream`.
-        compressedFilePath.inputStream().use { fileInputStream ->
-
-            // PASSAGGIO 2
-            // 1. `ZipInputStream(fileInputStream)` prende quei byte grezzi e li incapsula in un decodificatore ZIP.
-            // 2. `.use { zipInputStream ->` assegna il decodificatore ZIP alla variabile `zipInputStream`.
-            ZipInputStream(fileInputStream).use { zipInputStream ->
-
-                // PASSAGGIO 3
-                // Qui sei nel blocco più interno. Hai a disposizione ENTRAMBI gli oggetti,
-                // ma per leggere i file ZIP devi invocare i metodi su `zipInputStream`:
+    fun unpack(compressedFilePath: Path, destinationDirectory: Path): Boolean {
+        return try {
+            //create directory if not exists
+            destinationDirectory.createDirectory();
+            //get inputStream from compressedFile that used with ZipInputStream
+            ZipInputStream(compressedFilePath.inputStream()).use { zipInputStream ->
+                //use var because is mutable
                 var entry = zipInputStream.nextEntry
-        return false
+                while (entry != null) {
+                    val finalPath = destinationDirectory.resolve(entry.name)
+                    if (entry.isDirectory) {
+                        finalPath.createDirectories()
+                    } else {
+                        //? Safe call kotlin operator (avoid null values)
+                        finalPath.parent?.createDirectories();
+                        finalPath.outputStream().use { outputStream ->
+                            zipInputStream.copyTo(outputStream)
+                        }
+                    }
+                    zipInputStream.closeEntry()
+                    entry = zipInputStream.nextEntry
+                }
+            }
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
-
-
 }

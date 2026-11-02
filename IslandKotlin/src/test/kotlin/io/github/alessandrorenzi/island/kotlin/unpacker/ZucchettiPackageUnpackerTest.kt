@@ -27,8 +27,8 @@ class ZucchettiPackageUnpackerTest {
     @Test
     fun assertTrueWithAZipPackageThatIsAValidZipPackage(){
         val fileSystem = Jimfs.newFileSystem(Configuration.unix())
-        val dummyZipPath = fileSystem.getPath("zucchetti.zip")
-        val dummyExtractingPath = dummyZipPath / "extracted"
+        val dummyZipPath = fileSystem.getPath("/zucchetti.zip")
+        val dummyExtractingPath = fileSystem.getPath("/extracted")
         //build a real .zip file
         ZipOutputStream(dummyZipPath.outputStream()).use{ zip ->
             zip.putNextEntry(ZipEntry("txtFile.txt"))
