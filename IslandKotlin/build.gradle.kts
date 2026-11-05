@@ -12,6 +12,8 @@ kotlin{
     jvmToolchain(21)
 }
 dependencies {
+    // Source: https://mvnrepository.com/artifact/org.apache.commons/commons-compress
+    implementation("org.apache.commons:commons-compress:1.28.0")
     testImplementation(kotlin("test"))
     // Source: https://mvnrepository.com/artifact/com.google.jimfs/jimfs
     testImplementation("com.google.jimfs:jimfs:1.3.1")

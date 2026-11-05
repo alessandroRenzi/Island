@@ -39,4 +39,16 @@ class ZucchettiPackageUnpackerTest {
         val result = zucchettiUnpacker.unpack(compressedFilePath = dummyZipPath, destinationDirectory = dummyExtractingPath)
         assertTrue(result)
     }
+
+    @Test
+    fun assertFalseWithAGzPackageThatIsNotAValidGzPackage(){
+        val fileSystem = Jimfs.newFileSystem(Configuration.unix())
+        //Higher Order function (apply)
+        val dummyTarGzPath = fileSystem.getPath("zucchetti.tar.gz").apply {
+            writeText("this is not a real .tar.gz file") }
+        val dummyExtractingPath = fileSystem.getPath("/extracted")
+        val zucchettiPackageUnpackerTest = ZucchettiPackageUnpacker()
+        val result = zucchettiPackageUnpackerTest.unpack(compressedFilePath = dummyTarGzPath, destinationDirectory = dummyExtractingPath)
+        assertFalse(result)
+    }
 }
