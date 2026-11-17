@@ -9,7 +9,6 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import kotlin.io.path.*
 
-
 class ZucchettiPackageUnpackerTest {
 
     @Test
@@ -51,4 +50,17 @@ class ZucchettiPackageUnpackerTest {
         val result = zucchettiPackageUnpackerTest.unpack(compressedFilePath = dummyTarGzPath, destinationDirectory = dummyExtractingPath)
         assertFalse(result)
     }
+/*
+    @Test
+    fun assertTrueWithAGZPackageThatIsAValidGzPackage(){
+        val fileSystem = Jimfs.newFileSystem(Configuration.unix())
+        val dummyTarGzPath = fileSystem.getPath("/zucchetti.tar.gz")
+        val dummyExtractingPath = fileSystem.getPath("/extracted")
+        TarArchiveOutputStream(GZIPOutputStream(dummyTarGzPath.outputStream())).use { tarGzip ->
+            tarGzip.putArchiveEntry()
+        }
+
+    }
+
+ */
 }
