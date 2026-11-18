@@ -1,9 +1,9 @@
 package io.github.alessandrorenzi.island.kotlin.unpacker
 
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
+import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.zip.GZIPInputStream
 import java.util.zip.ZipInputStream
 import kotlin.io.path.createDirectories
 import kotlin.io.path.createDirectory
@@ -20,7 +20,7 @@ class ZucchettiPackageUnpacker {
             //get inputStream from compressedFile that used with ZipInputStream
             if(compressedFilePath.extension == "gz"){
                 //wrapping TarArchiveInputStream into GZIPInputStream
-                TarArchiveInputStream(GZIPInputStream(compressedFilePath.inputStream())).use { gzInputStream ->
+                TarArchiveInputStream(GzipCompressorInputStream(compressedFilePath.inputStream())).use { gzInputStream ->
                     var entryGz = gzInputStream.nextEntry
                     while (entryGz != null) {
                         val finalPathGz = destinationDirectory.resolve(entryGz.name)

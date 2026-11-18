@@ -2,6 +2,10 @@ package io.github.alessandrorenzi.island.kotlin.unpacker
 
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
+import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream
+import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
+import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream
+import org.apache.commons.lang3.arch.Processor
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -50,17 +54,21 @@ class ZucchettiPackageUnpackerTest {
         val result = zucchettiPackageUnpackerTest.unpack(compressedFilePath = dummyTarGzPath, destinationDirectory = dummyExtractingPath)
         assertFalse(result)
     }
-/*
+
+    /*
     @Test
     fun assertTrueWithAGZPackageThatIsAValidGzPackage(){
         val fileSystem = Jimfs.newFileSystem(Configuration.unix())
         val dummyTarGzPath = fileSystem.getPath("/zucchetti.tar.gz")
         val dummyExtractingPath = fileSystem.getPath("/extracted")
-        TarArchiveOutputStream(GZIPOutputStream(dummyTarGzPath.outputStream())).use { tarGzip ->
-            tarGzip.putArchiveEntry()
+        (TarArchiveOutputStream(dummyTarGzPath.outputStream())).use { tarArchive ->
+            GzipCompressorOutputStream(tarArchive).use { gzipCompressor ->
+                gzipCompressor.write("txtFile.txt".toByteArray())
+                gzipCompressor.write
+            }
         }
-
+*/
     }
 
- */
+
 }
