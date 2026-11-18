@@ -2,10 +2,6 @@ package io.github.alessandrorenzi.island.kotlin.unpacker
 
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
-import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream
-import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
-import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream
-import org.apache.commons.lang3.arch.Processor
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -67,8 +63,9 @@ class ZucchettiPackageUnpackerTest {
                 gzipCompressor.write
             }
         }
+}
 */
-    }
+
 
 
 }
