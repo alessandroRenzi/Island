@@ -2,14 +2,9 @@ package io.github.alessandrorenzi.island.kotlin.unpacker
 
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
-import java.nio.file.Files
 import java.nio.file.Path
 import java.util.zip.ZipInputStream
-import kotlin.io.path.createDirectories
-import kotlin.io.path.createDirectory
-import kotlin.io.path.extension
-import kotlin.io.path.inputStream
-import kotlin.io.path.outputStream
+import kotlin.io.path.*
 
 class ZucchettiPackageUnpacker {
 
@@ -18,24 +13,24 @@ class ZucchettiPackageUnpacker {
             //create directory if not exists
             destinationDirectory.createDirectory()
             //get inputStream from compressedFile that used with ZipInputStream
-            if(compressedFilePath.extension == "gz"){
+            if (compressedFilePath.extension == "gz") {
                 //wrapping TarArchiveInputStream into GZIPInputStream
                 TarArchiveInputStream(GzipCompressorInputStream(compressedFilePath.inputStream())).use { gzInputStream ->
                     var entryGz = gzInputStream.nextEntry
                     while (entryGz != null) {
                         val finalPathGz = destinationDirectory.resolve(entryGz.name)
-                        if (entryGz.isDirectory){
+                        if (entryGz.isDirectory) {
                             finalPathGz.createDirectories()
-                        }else
+                        } else
                             finalPathGz.parent?.createDirectories()
-                            finalPathGz.outputStream().use { outputStream ->
-                                gzInputStream.copyTo(outputStream)
-                            }
-                    entryGz = gzInputStream.nextEntry
+                        finalPathGz.outputStream().use { outputStream ->
+                            gzInputStream.copyTo(outputStream)
+                        }
+                        entryGz = gzInputStream.nextEntry
                     }
 
                 }
-            }else {
+            } else {
                 ZipInputStream(compressedFilePath.inputStream()).use { zipInputStream ->
                     //use var because is mutable
                     var entry = zipInputStream.nextEntry

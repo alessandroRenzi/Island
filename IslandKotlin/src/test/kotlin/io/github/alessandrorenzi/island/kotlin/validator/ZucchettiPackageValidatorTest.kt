@@ -67,7 +67,7 @@ class ZucchettiPackageValidatorTest {
     fun fileFromAbsolutePathExists(){
         val validator = ZucchettiPackageValidator()
         val tempDir = createTempDirectory()
-        val fileFromTmpDir = (tempDir / "zucchetti.zip").createFile();
+        val fileFromTmpDir = (tempDir / "zucchetti.zip").createFile()
         assertTrue(validator.exists(fileFromTmpDir.pathString))
     }
 

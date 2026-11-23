@@ -18,10 +18,4 @@ class ZucchettiPackageValidator {
         val completePathWithFile = Path(fileNameWithPath)
         return completePathWithFile.exists() && completePathWithFile.isRegularFile()
     }
-
-/*    fun exists(fileNameWithPath: String): Boolean =
-        Path(fileNameWithPath).let { path ->
-            path.exists() && path.isRegularFile()
-        }
-*/
 }
