@@ -69,20 +69,25 @@ class ZucchettiPackageUnpackerTest {
         val fileSystem = Jimfs.newFileSystem(Configuration.unix())
         val dummyTarGzPath = fileSystem.getPath("/zucchetti.tar.gz")
         val dummyExtractingPath = fileSystem.getPath("/extracted")
-        val fileContent = "I am a txt ftile than i am going to be compressed".toByteArray()
-        val fileEntry = TarArchiveEntry("txtFile.txt").apply {
-            size = fileContent.size.toLong()
-        }
         GzipCompressorOutputStream(dummyTarGzPath.outputStream()).use { gzipOut ->
             TarArchiveOutputStream(gzipOut).use { tarOut ->
-                tarOut.putArchiveEntry(fileEntry)
-                tarOut.write(fileContent)
-                tarOut.closeArchiveEntry()
+                //Call the extension function
+                tarOut.addFile("txtFile.txt", "I am a txt ftile than i am going to be compressed")
             }
-
         }
         val zucchettiUnpacker = ZucchettiPackageUnpacker()
         val result = zucchettiUnpacker.unpack(dummyTarGzPath, dummyExtractingPath)
         assertTrue(result)
     }
+}
+
+//EXTENSION FUNCTION
+private fun TarArchiveOutputStream.addFile(name: String, content: String) {
+    val fileContent = content.toByteArray()
+    val fileEntry = TarArchiveEntry(name).apply {
+        size = fileContent.size.toLong()
+    }
+    putArchiveEntry(fileEntry)
+    write(fileContent)
+    closeArchiveEntry()
 }
